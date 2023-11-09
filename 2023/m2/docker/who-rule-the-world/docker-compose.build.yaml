@@ -1,14 +1,26 @@
-version: '3'
+version: "3"
 services:
-  vote:
-    image: localhost:5000/vote
-    ports:
-      - "5001:80"
-  results:
-    image: localhost:5000/result
-    ports:
-      - "5002:80"
-  send-data:
-    image: localhost:5000/seed-data
   worker:
-    image: localhost:5000/worker
+    build:
+      context: ./worker
+    networks:
+      - registry-network
+  vote:
+    build:
+      context: ./seed-data
+    networks:
+      - registry-network
+  send-data:
+    build :
+      context: ./seed-data
+    networks:
+      - registry-network
+  result:
+    build:
+      context: ./result
+    networks:
+      - registry-network
+
+networks:
+  registry-network:
+    external: true
