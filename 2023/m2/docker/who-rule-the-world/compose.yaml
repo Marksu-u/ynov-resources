@@ -8,7 +8,7 @@ services:
     image: localhost:5000/result
     ports:
       - "5002:80"
-  send-data:
+  seed-data:
     image: localhost:5000/seed-data
   worker:
     image: localhost:5000/worker
